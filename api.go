@@ -33,4 +33,46 @@ func (p *Pipeline) Annotate(d *Document) error {
 	}
 
 	for _, tagger := range p.taggers {
-		if 
+		if err = tagger.Process(d); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// AnnotatePro tags the Document by each configured processors and taggers
+func (p *Pipeline) AnnotatePro(d *Document, taggers ...Processor) error {
+	err := Processors["_"].Process(d)
+	if err != nil {
+		return err
+	}
+	for _, anno := range p.Annotators {
+		if err = Processors[anno].Process(d); err != nil {
+			return err
+		}
+	}
+	for _, tagger := range p.taggers {
+		if err = tagger.Process(d); err != nil {
+			return err
+		}
+	}
+	for _, tagger := range taggers {
+		if err = tagger.Process(d); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// NLP returns ling handler with the annotators
+func NLP(annotators ...string) (*Pipeline, error) {
+	for _, anno := range annotators {
+		if Processors[anno] == nil {
+			return nil, fmt.Errorf("Processor %s doesn't exists", anno)
+		}
+	}
+	return &Pipeline{Annotators: annotators}, nil
+}
+
+// DefaultNLP returns ling handler with norm, lemma, unidecode and regex
+func DefaultNLP() (*
