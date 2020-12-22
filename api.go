@@ -75,4 +75,16 @@ func NLP(annotators ...string) (*Pipeline, error) {
 }
 
 // DefaultNLP returns ling handler with norm, lemma, unidecode and regex
-func DefaultNLP() (*
+func DefaultNLP() (*Pipeline, error) {
+	return NLP("norm", "lemma", "unidecode", "regex")
+}
+
+// MustNLP is like NLP but panics if the annotators are not correct. It
+// simplifies safe initialization of global variables holding ling handler
+func MustNLP(annotators ...string) *Pipeline {
+	p, err := NLP(annotators...)
+	if err != nil {
+		panic(err)
+	}
+	return p
+}
