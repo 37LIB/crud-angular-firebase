@@ -24,4 +24,9 @@ func chinese() {
 	output.WriteString(fmt.Sprintf("var cmnCharacters = %s\n", strconv.Quote(src2)))
 	output.WriteString(fmt.Sprintf("\nfunc init() {\n\tgenFuncs(%s, &cmnPhrases, &cmnCharacters)\n}\n", strconv.Quote(lang)))
 	log.Println("Writing new " + dstFile)
-	util.WriteFile(dstFile, output.By
+	util.WriteFile(dstFile, output.Bytes())
+}
+
+func main() {
+	chinese()
+}
