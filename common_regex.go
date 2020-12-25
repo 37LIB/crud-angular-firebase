@@ -24,4 +24,23 @@ const (
 	SHA1HexPattern        = `[0-9a-fA-F]{40}`
 	SHA256HexPattern      = `[0-9a-fA-F]{64}`
 	GUIDPattern           = `[0-9a-fA-F]{8}-?[a-fA-F0-9]{4}-?[a-fA-F0-9]{4}-?[a-fA-F0-9]{4}-?[a-fA-F0-9]{12}`
-	IS
+	ISBN13Pattern         = `(?:[\d]-?){12}[\dxX]`
+	ISBN10Pattern         = `(?:[\d]-?){9}[\dxX]`
+	MACAddressPattern     = `(([a-fA-F0-9]{2}[:-]){5}([a-fA-F0-9]{2}))`
+	IBANPattern           = `[A-Z]{2}\d{2}[A-Z0-9]{4}\d{7}([A-Z\d]?){0,16}`
+	NumericPattern        = `([+\-]?((\d{1,3}(,\d{3})+))|((?:0|[1-9]\d*)(?:\.\d*)?(?:[eE][+\-]?\d+)?))`
+	DigitsPattern         = `\d+`
+)
+
+// Regexes is the compiled regular expressions
+var Regexes = map[string]*regexp.Regexp{
+	"date":             regexp.MustCompile(DatePattern),
+	"time":             regexp.MustCompile(TimePattern),
+	"phone":            regexp.MustCompile(PhonePattern),
+	"phones_with_exts": regexp.MustCompile(PhonesWithExtsPattern),
+	"link":             regexp.MustCompile(LinkPattern),
+	"email":            regexp.MustCompile(EmailPattern),
+	"ipv4":             regexp.MustCompile(IPv4Pattern),
+	"credit_card":      regexp.MustCompile(CreditCardPattern),
+	"btc_address":      regexp.MustCompile(BtcAddressPattern),
+	"ssn"
