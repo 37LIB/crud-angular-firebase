@@ -43,4 +43,17 @@ var Regexes = map[string]*regexp.Regexp{
 	"ipv4":             regexp.MustCompile(IPv4Pattern),
 	"credit_card":      regexp.MustCompile(CreditCardPattern),
 	"btc_address":      regexp.MustCompile(BtcAddressPattern),
-	"ssn"
+	"ssn":              regexp.MustCompile(SSNPattern),
+	"md5_hex":          regexp.MustCompile(MD5HexPattern),
+	"sha1_hex":         regexp.MustCompile(SHA1HexPattern),
+	"sha256_hex":       regexp.MustCompile(SHA256HexPattern),
+	"guid":             regexp.MustCompile(GUIDPattern),
+	"isbn13":           regexp.MustCompile(ISBN13Pattern),
+	"isbn10":           regexp.MustCompile(ISBN10Pattern),
+	"visa_credit_card": regexp.MustCompile(VISACreditCardPattern),
+	"mc_credit_card":   regexp.MustCompile(MCCreditCardPattern),
+	"mac_address":      regexp.MustCompile(MACAddressPattern),
+	"iban":             regexp.MustCompile(IBANPattern),
+	"numeric":          regexp.MustCompile(NumericPattern),
+	"digits":           regexp.MustCompile(DigitsPattern),
+}
