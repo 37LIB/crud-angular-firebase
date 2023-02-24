@@ -57,4 +57,15 @@ func (t *Tokenizer) Process(d *Document) error {
 	for i, item := range tokenizer.TokenizePro(d.Text) {
 		word := item.Text
 		l := len([]byte(word))
-		token := &Token{Doc: d, Text: word, Type: Type(word
+		token := &Token{Doc: d, Text: word, Type: Type(word), Script: Script(word),
+			I: i, StartByte: pos, EndByte: pos + l,
+			Annotations: map[string]string{Lower: strings.ToLower(word)}}
+		if item.Norm != "" {
+			token.Annotations[Norm] = item.Norm
+		}
+		pos += l
+		tokens = append(tokens, token)
+	}
+	d.Tokens = tokens
+	return nil
+}
