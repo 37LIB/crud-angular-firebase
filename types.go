@@ -50,4 +50,14 @@ type Span struct {
 
 func (s *Span) String() string {
 	output := bytes.Buffer{}
-	f
+	for i := s.Start; i < s.End; i++ {
+		output.WriteString(s.Doc.Tokens[i].String())
+	}
+	return output.String()
+}
+
+type Processor interface {
+	Process(d *Document) error
+}
+
+var Processors = make(map[string]Processor)
